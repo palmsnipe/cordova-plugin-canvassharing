@@ -5,6 +5,7 @@ using System.Text;
 using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
+using Microsoft.Phone.Tasks;
 
 public class CanvasSharingPlugin : BaseCommand
 {
@@ -31,7 +32,7 @@ public class CanvasSharingPlugin : BaseCommand
 
                 if (picture.Name.Contains(fileName))
                 {
-                    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, picture.Name));
+                    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, picture.GetPath()));
                 }
                 else
                 {
@@ -45,4 +46,24 @@ public class CanvasSharingPlugin : BaseCommand
             DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
         }
     }
+
+    public void sharePicture(string jsonArgs)
+    {
+        try
+        {
+            var options = JsonHelper.Deserialize<string[]>(jsonArgs);
+
+            string path = options[0];
+            Microsoft.Phone.Tasks.ShareMediaTask smt = new ShareMediaTask();
+            smt.FilePath = path; 
+            smt.Show();
+            
+            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, picture.Name));
+        }
+        catch (Exception ex)
+        {
+            DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
+        }
+    }
+    
 }
