@@ -59,7 +59,7 @@ public class CanvasSharingPlugin : BaseCommand
             smt.FilePath = path; 
             smt.Show();
             
-            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, picture.Name));
+            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, path));
         }
         catch (Exception ex)
         {
