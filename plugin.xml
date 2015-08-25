@@ -1,0 +1,36 @@
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    id="com.mobilemeans.CanvasSharingPlugin"
+    version="0.1.0">
+
+    <name>Canvas Sharing</name>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <description>This plugin shares a canvas</description>
+    <author>Cyril Moralès - cyril@mobilemeans.com</author>
+    <keywords>canvas, image, sharing</keywords>
+
+    <license>MIT</license>
+
+    <js-module src="www/CanvasSharingPlugin.js" name="CanvasSharingPlugin">
+        <clobbers target="window.canvasSharingPlugin" />
+    </js-module>
+
+    <!-- wp8 -->
+    <platform name="wp8">
+        <config-file target="config.xml" parent="/*">
+            <feature name="CanvasSharing">
+                <param name="wp-package" value="CanvasSharingPlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        
+        <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
+            <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
+        </config-file>
+
+        <source-file src="src/wp8/CanvasSharingPlugin.cs" />
+    </platform>
+</plugin>
