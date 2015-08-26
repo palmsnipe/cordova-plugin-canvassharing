@@ -10,16 +10,19 @@ using Microsoft.Phone.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Reflection;
-using Windows.ApplicationModel.Email.EmailMessage;
+//  using Windows.ApplicationModel.Email.EmailMessage;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.ApplicationModel.Email;
+using System.Windows.Threading;
 
 namespace Cordova.Extension.Commands
 {
 
     public class CanvasSharing : BaseCommand
     {
+        private StorageFile storageFile;
+        
         public CanvasSharing()
         {
         }
@@ -90,54 +93,100 @@ namespace Cordova.Extension.Commands
                 DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
             }
         }
+        
+        private async void ComposeEmail(String subject, String messageBody, StorageFile fl)
+        {
+            var msg = new EmailMessage();
+            msg.Subject = subject;
+            msg.Body = messageBody;
+            msg.To.Add(new EmailRecipient("contact@123kidsfun.com"));
+    
+            String attachmentFile = fl.Name;
+    
+            if (fl != null && attachmentFile != "")
+            {
+                try
+                {
+                    var rastream = RandomAccessStreamReference.CreateFromFile(fl);
+                    var attachment = new EmailAttachment(attachmentFile, rastream);
+                    msg.Attachments.Add(attachment);
+                }
+                catch (Exception e)
+                {
+                    //  Debug.WriteLine("[C#] attachment exception: " + e.Message);
+                }
+            }
+    
+            
+            try
+            {
+                await EmailManager.ShowComposeNewEmailAsync(msg);
+            }
+            catch (Exception e)
+            {
+                //  Debug.WriteLine("[C#] email manager exception: " + e.Message);
+            }
+        }
+    
+        private async void CreateEmail(String subject, String body, String path)
+        {
+            storageFile = await StorageFile.GetFileFromPathAsync(path);
+            ComposeEmail(subject, body, storageFile);
+        }
     
         public void sendEmail(string jsonArgs)
         {
-            try
-            {
-                var options = JsonHelper.Deserialize<string[]>(jsonArgs);
+            //  try
+            //  {
+            //      var options = JsonHelper.Deserialize<string[]>(jsonArgs);
     
-                string title = options[0];
-                string description = options[1];
-                string path = options[2];
-                //  Microsoft.Phone.Tasks.ShareMediaTask smt = new ShareMediaTask();
-                //  smt.FilePath = path; 
-                //  smt.Show();
+            //      string title = options[0];
+            //      string description = options[1];
+            //      string path = options[2];
                 
-                // Send an Email with attachment
-                EmailMessage email = new EmailMessage();
-                //  email.To.Add(new EmailRecipient("test@developerpublish.com"));
-                email.Subject = title;
-                email.Body = description;
+                //  Dispatcher.BeginInvoke(() =>
+                //  {
+                //      CreateEmail(title, description, path);
+                //  });
+                //  CreateEmail(title, description, path);
+            //      //  Microsoft.Phone.Tasks.ShareMediaTask smt = new ShareMediaTask();
+            //      //  smt.FilePath = path; 
+            //      //  smt.Show();
                 
-                StorageFile fl = await StorageFile.GetFileFromPathAsync(path);
-                String attachmentFile = fl.Name;
+            //      // Send an Email with attachment
+            //      EmailMessage email = new EmailMessage();
+            //      //  email.To.Add(new EmailRecipient("test@developerpublish.com"));
+            //      email.Subject = title;
+            //      email.Body = description;
+                
+            //      StorageFile fl = StorageFile.GetFileFromPathAsync(path);
+            //      String attachmentFile = fl.Name;
 
-                if (fl != null && attachmentFile != "")
-                {
-                    try
-                    {
-                        var rastream = RandomAccessStreamReference.CreateFromFile(fl);
-                        var attachment = new EmailAttachment(attachmentFile, rastream);
-                        msg.Attachments.Add(attachment);
-                    }
-                    catch (Exception e)
-                    {
-                        //  Debug.WriteLine("[C#] attachment exception: " + e.Message);
-                    }
-                }
+            //      if (fl != null && attachmentFile != "")
+            //      {
+            //          try
+            //          {
+            //              var rastream = RandomAccessStreamReference.CreateFromFile(fl);
+            //              var attachment = new EmailAttachment(attachmentFile, rastream);
+            //              msg.Attachments.Add(attachment);
+            //          }
+            //          catch (Exception e)
+            //          {
+            //              //  Debug.WriteLine("[C#] attachment exception: " + e.Message);
+            //          }
+            //      }
                 
-                //  var file = await GetTextFile();
-                //  email.Attachments.Add(new EmailAttachment(file.Name, file));
-                await EmailManager.ShowComposeNewEmailAsync(email);
+            //      //  var file = await GetTextFile();
+            //      //  email.Attachments.Add(new EmailAttachment(file.Name, file));
+            //      await EmailManager.ShowComposeNewEmailAsync(email);
 
                 
-                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, path));
-            }
-            catch (Exception ex)
-            {
-                DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
-            }
+            //      DispatchCommandResult(new PluginResult(PluginResult.Status.OK, path));
+            //  }
+            //  catch (Exception ex)
+            //  {
+            //      DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
+            //  }
         }
         
     }
