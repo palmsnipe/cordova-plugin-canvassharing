@@ -82,8 +82,10 @@ namespace Cordova.Extension.Commands
                 //  AssemblyName asmName = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
                 //  string version = asmName.Version.ToString();
                 //  var version = Package.Current.Id.Version;
-                String version = System.Reflection.Assembly.GetExecutingAssembly()
-                    .FullName.Split('=')[1].Split(',')[0];
+                //  String version = System.Reflection.Assembly.GetExecutingAssembly()
+                //      .FullName.Split('=')[1].Split(',')[0];
+                var nameHelper = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
+                var version = nameHelper.Version;
                 //  string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
     
                 if (String.IsNullOrEmpty(version))
