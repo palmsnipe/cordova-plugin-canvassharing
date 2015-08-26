@@ -29,7 +29,7 @@ cordova.define("com.mobilemeans.CanvasSharingPlugin.CanvasSharingPlugin", functi
         }
     },
     
-    getAppVersion:function(successCallback, failureCallback) {
+    appVersion:function(successCallback, failureCallback) {
 
         // successCallback required
         if (typeof successCallback != "function") {
