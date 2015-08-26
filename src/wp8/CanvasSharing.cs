@@ -23,7 +23,7 @@ namespace Cordova.Extension.Commands
 
     public class CanvasSharing : BaseCommand
     {
-        private StorageFile storageFile;
+        //  private StorageFile storageFile;
         
         public CanvasSharing()
         {
