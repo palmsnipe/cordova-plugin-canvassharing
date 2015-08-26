@@ -66,5 +66,27 @@ public class CanvasSharingPlugin : BaseCommand
             DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
         }
     }
+
+    public void getAppVersion()
+    {
+        try
+        {
+            string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
+
+            if (String.IsNullOrEmpty(version))
+            {
+                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
+            }
+            else
+            {
+                DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, 
+                    "Unable to get the version number"));
+            }
+        }
+        catch (Exception ex)
+        {
+            DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
+        }
+    }
     
 }

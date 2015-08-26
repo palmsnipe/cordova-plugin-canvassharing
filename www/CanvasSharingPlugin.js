@@ -27,6 +27,19 @@
         else {
             return cordova.exec(successCallback, failureCallback, "CanvasSharingPlugin","sharePicture",[path]);
         }
+    },
+    
+    getAppVersion:function(successCallback, failureCallback) {
+        // successCallback required
+        if (typeof successCallback != "function") {
+            console.log("CanvasSharingPlugin Error: successCallback is not a function");
+        }
+        else if (typeof failureCallback != "function") {
+            console.log("CanvasSharingPlugin Error: failureCallback is not a function");
+        }
+        else {
+            return cordova.exec(successCallback, failureCallback, "CanvasSharingPlugin","getAppVersion");
+        }
     }
     
   };
