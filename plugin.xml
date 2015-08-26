@@ -14,8 +14,8 @@
 
     <license>MIT</license>
 
-    <js-module src="www/CanvasSharingPlugin.js" name="CanvasSharingPlugin">
-        <clobbers target="canvasSharingPlugin" />
+    <js-module src="www/CanvasSharingPlugin.js" name="CanvasSharing">
+        <clobbers target="window.plugins.canvassharing" />
     </js-module>
 
     <!-- wp8 -->
