@@ -9,6 +9,7 @@ using WPCordovaClassLib.Cordova.JSON;
 using Microsoft.Phone.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Reflection;
 
 namespace Cordova.Extension.Commands
 {
@@ -78,7 +79,9 @@ namespace Cordova.Extension.Commands
             {
                 //  var options = JsonHelper.Deserialize<string[]>(jsonArgs);
                 //  DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "toto"));
-                string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
+                AssemblyName asmName = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
+                string version = asmName.Version.ToString();
+                //  string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
     
                 if (String.IsNullOrEmpty(version))
                 {

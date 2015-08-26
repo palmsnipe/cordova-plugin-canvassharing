@@ -25,7 +25,6 @@ module.exports = {
         }
     },
     appVersion: function(successCallback, failureCallback) {
-        alert("plugin appversion");
         // successCallback required
         if (typeof successCallback != "function") {
             console.log("CanvasSharingPlugin Error: successCallback is not a function");
