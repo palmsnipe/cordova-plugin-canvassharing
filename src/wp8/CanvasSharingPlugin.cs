@@ -69,28 +69,28 @@ public class CanvasSharingPlugin : BaseCommand
         }
     }
 
-    public void appVersion(string jsonArgs)
-    {
-        try
-        {
-            //  var options = JsonHelper.Deserialize<string[]>(jsonArgs);
-            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "toto"));
-            //string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
+    //  public void appVersion(string jsonArgs)
+    //  {
+    //      try
+    //      {
+    //          //  var options = JsonHelper.Deserialize<string[]>(jsonArgs);
+    //          DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "toto"));
+    //          //string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
 
-            //if (String.IsNullOrEmpty(version))
-            //{
-            //    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
-            //}
-            //else
-            //{
-            //    DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR,
-            //        "Unable to get the version number"));
-            //}
-        }
-        catch (Exception ex)
-        {
-            DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
-        }
-    }
+    //          //if (String.IsNullOrEmpty(version))
+    //          //{
+    //          //    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
+    //          //}
+    //          //else
+    //          //{
+    //          //    DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR,
+    //          //        "Unable to get the version number"));
+    //          //}
+    //      }
+    //      catch (Exception ex)
+    //      {
+    //          DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
+    //      }
+    //  }
     
 }

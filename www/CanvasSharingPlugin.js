@@ -27,20 +27,6 @@ cordova.define("com.mobilemeans.CanvasSharingPlugin.CanvasSharingPlugin", functi
         else {
             return cordova.exec(successCallback, failureCallback, "CanvasSharingPlugin","sharePicture",[path]);
         }
-    },
-    
-    appVersion:function(successCallback, failureCallback) {
-
-        // successCallback required
-        if (typeof successCallback != "function") {
-            console.log("CanvasSharingPlugin Error: successCallback is not a function");
-        }
-        else if (typeof failureCallback != "function") {
-            console.log("CanvasSharingPlugin Error: failureCallback is not a function");
-        }
-        else {
-            return cordova.exec(successCallback, failureCallback, "CanvasSharingPlugin","appVersion", []);
-        }
     }
     
   };
