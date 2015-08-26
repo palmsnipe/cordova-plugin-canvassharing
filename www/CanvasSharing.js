@@ -9,7 +9,7 @@ module.exports = {
         }
         else {
             var imageData = canvas.replace(/data:image\/png;base64,/,'');
-            return cordova.exec(successCallback, failureCallback, "CanvasSharingPlugin","saveImageDataToLibrary",[imageData]);
+            return cordova.exec(successCallback, failureCallback, "CanvasSharing","saveImageDataToLibrary",[imageData]);
         }
     },
     sharePicture: function(successCallback, failureCallback, path) {
@@ -21,7 +21,7 @@ module.exports = {
             console.log("CanvasSharingPlugin Error: failureCallback is not a function");
         }
         else {
-            return cordova.exec(successCallback, failureCallback, "CanvasSharingPlugin","sharePicture",[path]);
+            return cordova.exec(successCallback, failureCallback, "CanvasSharing","sharePicture",[path]);
         }
     },
     appVersion: function(successCallback, failureCallback) {
@@ -34,7 +34,7 @@ module.exports = {
             console.log("CanvasSharingPlugin Error: failureCallback is not a function");
         }
         else {
-            return cordova.exec(successCallback, failureCallback, "CanvasSharingPlugin","appVersion",[]);
+            return cordova.exec(successCallback, failureCallback, "CanvasSharing","appVersion",[]);
         }
     }
 };

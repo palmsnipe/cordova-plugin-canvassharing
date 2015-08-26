@@ -13,9 +13,9 @@ using Microsoft.Phone.Tasks;
 namespace Cordova.Extension.Commands
 {
 
-    public class CanvasSharingPlugin : BaseCommand
+    public class CanvasSharing : BaseCommand
     {
-        public CanvasSharingPlugin()
+        public CanvasSharing()
         {
         }
     

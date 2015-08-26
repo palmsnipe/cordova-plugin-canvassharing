@@ -14,7 +14,7 @@
 
     <license>MIT</license>
 
-    <js-module src="www/CanvasSharingPlugin.js" name="CanvasSharing">
+    <js-module src="www/CanvasSharing.js" name="CanvasSharing">
         <clobbers target="window.plugins.canvassharing" />
     </js-module>
 
@@ -22,7 +22,7 @@
     <platform name="wp8">
         <config-file target="config.xml" parent="/*">
             <feature name="CanvasSharing">
-                <param name="wp-package" value="CanvasSharingPlugin"/>
+                <param name="wp-package" value="CanvasSharing"/>
                 <param name="onload" value="true" />
             </feature>
         </config-file>
@@ -31,6 +31,6 @@
             <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
         </config-file>
 
-        <source-file src="src/wp8/CanvasSharingPlugin.cs" />
+        <source-file src="src/wp8/CanvasSharing.cs" />
     </platform>
 </plugin>
