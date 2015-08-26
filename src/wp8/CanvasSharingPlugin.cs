@@ -7,6 +7,7 @@ using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
 using Microsoft.Phone.Tasks;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -69,21 +70,23 @@ public class CanvasSharingPlugin : BaseCommand
         }
     }
 
-    public void getAppVersion()
+    public void appVersion(string jsonArgs)
     {
         try
         {
-            string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
+            var options = JsonHelper.Deserialize<string[]>(jsonArgs);
+            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "toto"));
+            //string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
 
-            if (String.IsNullOrEmpty(version))
-            {
-                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
-            }
-            else
-            {
-                DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, 
-                    "Unable to get the version number"));
-            }
+            //if (String.IsNullOrEmpty(version))
+            //{
+            //    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
+            //}
+            //else
+            //{
+            //    DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR,
+            //        "Unable to get the version number"));
+            //}
         }
         catch (Exception ex)
         {
