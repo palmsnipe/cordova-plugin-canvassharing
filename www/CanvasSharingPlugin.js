@@ -1,8 +1,5 @@
-cordova.define("com.mobilemeans.CanvasSharingPlugin.CanvasSharingPlugin", function(require, exports, module) { 
-
-  module.exports = {
-    
-    saveImageDataToLibrary:function(successCallback, failureCallback, canvas) {
+module.exports = {
+    saveImageDataToLibrary: function(successCallback, failureCallback, canvas) {
         // successCallback required
         if (typeof successCallback != "function") {
             console.log("CanvasSharingPlugin Error: successCallback is not a function");
@@ -15,8 +12,7 @@ cordova.define("com.mobilemeans.CanvasSharingPlugin.CanvasSharingPlugin", functi
             return cordova.exec(successCallback, failureCallback, "CanvasSharingPlugin","saveImageDataToLibrary",[imageData]);
         }
     },
-    
-    sharePicture:function(successCallback, failureCallback, path) {
+    sharePicture: function(successCallback, failureCallback, path) {
         // successCallback required
         if (typeof successCallback != "function") {
             console.log("CanvasSharingPlugin Error: successCallback is not a function");
@@ -28,8 +24,5 @@ cordova.define("com.mobilemeans.CanvasSharingPlugin.CanvasSharingPlugin", functi
             return cordova.exec(successCallback, failureCallback, "CanvasSharingPlugin","sharePicture",[path]);
         }
     }
-    
-  };
+};
   
-
-});

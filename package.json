@@ -8,14 +8,14 @@
       "wp8"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/palmsnipe/cordova-plugin-canvassharing.git"
+  },
   "keywords": [
     "canvas",
     "image",
-    "photo library",
-    "ecosystem:cordova",
-    "cordova-ios",
-    "cordova-android",
-    "cordova-wp8"
+    "wp8"
   ],
   "engines": [
     {
