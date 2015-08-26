@@ -10,6 +10,10 @@ using Microsoft.Phone.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Reflection;
+using Windows.ApplicationModel.Email.EmailMessage;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.ApplicationModel.Email;
 
 namespace Cordova.Extension.Commands
 {
@@ -119,7 +123,7 @@ namespace Cordova.Extension.Commands
                     }
                     catch (Exception e)
                     {
-                        Debug.WriteLine("[C#] attachment exception: " + e.Message);
+                        //  Debug.WriteLine("[C#] attachment exception: " + e.Message);
                     }
                 }
                 
