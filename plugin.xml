@@ -1,5 +1,5 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-    id="com.mobilemeans.CanvasSharingPlugin"
+    id="com.mobilemeans.canvassharingplugin"
     version="0.1.0">
 
     <name>Canvas Sharing</name>
@@ -15,7 +15,7 @@
     <license>MIT</license>
 
     <js-module src="www/CanvasSharingPlugin.js" name="CanvasSharingPlugin">
-        <clobbers target="window.canvasSharingPlugin" />
+        <clobbers target="canvasSharingPlugin" />
     </js-module>
 
     <!-- wp8 -->
