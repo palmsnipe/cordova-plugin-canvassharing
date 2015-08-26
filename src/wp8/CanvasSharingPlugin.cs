@@ -7,7 +7,6 @@ using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
 using Microsoft.Phone.Tasks;
-using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -74,7 +73,7 @@ public class CanvasSharingPlugin : BaseCommand
     {
         try
         {
-            var options = JsonHelper.Deserialize<string[]>(jsonArgs);
+            //  var options = JsonHelper.Deserialize<string[]>(jsonArgs);
             DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "toto"));
             //string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
 
