@@ -7,8 +7,8 @@ using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
 using Microsoft.Phone.Tasks;
-//  using System.Xml;
-//  using System.Xml.Linq;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Cordova.Extension.Commands
 {
