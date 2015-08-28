@@ -84,39 +84,86 @@ namespace Cordova.Extension.Commands
     
         public void appVersion(string jsonArgs)
         {
-            
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
-                    if (frame != null)
-                    {
-                        PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
-                        if (page != null)
-                        {
-                            ApplicationBar bar = new ApplicationBar();
-                            bar.Mode = ApplicationBarMode.Default;
-                            bar.Opacity = 0.8; 
-                            bar.IsVisible = true;
-                            bar.IsMenuEnabled = true;
-                            
-                            ApplicationBarMenuItem menuItem1 = new ApplicationBarMenuItem();
-                            menuItem1.Text = "About";
-                            
-                            ApplicationBarIconButton button1 = new ApplicationBarIconButton();
-                            button1.IconUri = new Uri("/Images/appbar.next.rest.png", UriKind.Relative);
-                            button1.Text = "Tee Elinluovutuskortti";
-                            
-                            bar.Buttons.Add(button1);
-                            bar.MenuItems.Add(menuItem1);
-                            
-                            page.ApplicationBar = bar;
-                        }
-                    }
-                });
             try
             {
                 string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
     
+                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
+            }
+            catch (Exception ex)
+            {
+                DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
+            }
+        }
+        
+    
+        public void showAppBar(string jsonArgs)
+        {
+            try
+            {
+                var items = JsonHelper.Deserialize<string[]>(jsonArgs);
+                
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
+                        PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
+                        if (frame != null)
+                        {
+                            PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
+                            if (page != null)
+                            {
+                                ApplicationBar bar = new ApplicationBar();
+                                bar.Mode = ApplicationBarMode.Default;
+                                bar.Opacity = 0.8; 
+                                bar.IsVisible = true;
+                                bar.IsMenuEnabled = true;
+                                
+                                ApplicationBarMenuItem menuItem1 = new ApplicationBarMenuItem();
+                                menuItem1.Text = "About";
+                                
+                                ApplicationBarIconButton button1 = new ApplicationBarIconButton();
+                                button1.IconUri = new Uri("/Images/appbar.next.rest.png", UriKind.Relative);
+                                button1.Text = "Tee Elinluovutuskortti";
+                                
+                                bar.Buttons.Add(button1);
+                                bar.MenuItems.Add(menuItem1);
+                                
+                                page.ApplicationBar = bar;
+                            }
+                        }
+                    });
+                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
+            }
+            catch (Exception ex)
+            {
+                DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
+            }
+        }
+        
+    
+        public void hideAppBar(string jsonArgs)
+        {
+            try
+            {
+                //var items = JsonHelper.Deserialize<string[]>(jsonArgs);
+                
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
+                        PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
+                        if (frame != null)
+                        {
+                            PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
+                            if (page != null)
+                            {
+                                ApplicationBar bar = new ApplicationBar();
+                                bar.Mode = ApplicationBarMode.Default;
+                                bar.Opacity = 0.8; 
+                                bar.IsVisible = false;
+                                bar.IsMenuEnabled = false;
+                                
+                                page.ApplicationBar = bar;
+                            }
+                        }
+                    });
                 DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
             }
             catch (Exception ex)
