@@ -2,28 +2,27 @@
 using Microsoft.Xna.Framework.Media.PhoneExtensions;
 using System;
 using System.IO;
-using System.Text;
 using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
 using Microsoft.Phone.Tasks;
-using System.Xml;
 using System.Xml.Linq;
-using System.Reflection;
-/*
-using Windows.ApplicationModel.Email.EmailMessage;
+
+using System.Windows;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.ApplicationModel.Email;
-using System.Windows.Threading;
-*/
+using System.Diagnostics;
 
 namespace Cordova.Extension.Commands
 {
 
     public class CanvasSharing : BaseCommand
     {
-        //  private StorageFile storageFile;
+        private StorageFile storageFile;
         
         public CanvasSharing()
         {
@@ -41,13 +40,14 @@ namespace Cordova.Extension.Commands
                 using (var imageStream = new MemoryStream(imageBytes))
                 {
                     imageStream.Seek(0, SeekOrigin.Begin);
-    
+
                     string fileName = String.Format("kortti_{0:yyyyMMdd_HHmmss}", DateTime.Now);
                     var library = new MediaLibrary();
                     var picture = library.SavePicture(fileName, imageStream);
     
                     if (picture.Name.Contains(fileName))
                     {
+                        string picturepath = picture.GetPath();
                         DispatchCommandResult(new PluginResult(PluginResult.Status.OK, picture.GetPath()));
                     }
                     else
@@ -84,6 +84,35 @@ namespace Cordova.Extension.Commands
     
         public void appVersion(string jsonArgs)
         {
+            
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
+                    if (frame != null)
+                    {
+                        PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
+                        if (page != null)
+                        {
+                            ApplicationBar bar = new ApplicationBar();
+                            bar.Mode = ApplicationBarMode.Default;
+                            bar.Opacity = 0.8; 
+                            bar.IsVisible = true;
+                            bar.IsMenuEnabled = true;
+                            
+                            ApplicationBarMenuItem menuItem1 = new ApplicationBarMenuItem();
+                            menuItem1.Text = "About";
+                            
+                            ApplicationBarIconButton button1 = new ApplicationBarIconButton();
+                            button1.IconUri = new Uri("/Images/appbar.next.rest.png", UriKind.Relative);
+                            button1.Text = "Tee Elinluovutuskortti";
+                            
+                            bar.Buttons.Add(button1);
+                            bar.MenuItems.Add(menuItem1);
+                            
+                            page.ApplicationBar = bar;
+                        }
+                    }
+                });
             try
             {
                 string version = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
@@ -96,16 +125,15 @@ namespace Cordova.Extension.Commands
             }
         }
         
-        /*
+        
         private async void ComposeEmail(String subject, String messageBody, StorageFile fl)
         {
             var msg = new EmailMessage();
             msg.Subject = subject;
             msg.Body = messageBody;
-            msg.To.Add(new EmailRecipient("contact@123kidsfun.com"));
-    
+
             String attachmentFile = fl.Name;
-    
+
             if (fl != null && attachmentFile != "")
             {
                 try
@@ -116,18 +144,17 @@ namespace Cordova.Extension.Commands
                 }
                 catch (Exception e)
                 {
-                    //  Debug.WriteLine("[C#] attachment exception: " + e.Message);
+                    Debug.WriteLine("[C#] attachment exception: " + e.Message);
                 }
             }
-    
-            
+
             try
             {
                 await EmailManager.ShowComposeNewEmailAsync(msg);
             }
             catch (Exception e)
             {
-                //  Debug.WriteLine("[C#] email manager exception: " + e.Message);
+                Debug.WriteLine("[C#] email manager exception: " + e.Message);
             }
         }
     
@@ -136,11 +163,11 @@ namespace Cordova.Extension.Commands
             storageFile = await StorageFile.GetFileFromPathAsync(path);
             ComposeEmail(subject, body, storageFile);
         }
-        */
+        
     
         public void sendEmail(string jsonArgs)
         {
-            /*
+            
             try
             {
                 var options = JsonHelper.Deserialize<string[]>(jsonArgs);
@@ -149,42 +176,11 @@ namespace Cordova.Extension.Commands
                 string description = options[1];
                 string path = options[2];
                 
-                Dispatcher.BeginInvoke(() =>
+
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
                     CreateEmail(title, description, path);
                 });
-                CreateEmail(title, description, path);
-                //  Microsoft.Phone.Tasks.ShareMediaTask smt = new ShareMediaTask();
-                //  smt.FilePath = path; 
-                //  smt.Show();
-                
-                // Send an Email with attachment
-                EmailMessage email = new EmailMessage();
-                //  email.To.Add(new EmailRecipient("test@developerpublish.com"));
-                email.Subject = title;
-                email.Body = description;
-                
-                StorageFile fl = StorageFile.GetFileFromPathAsync(path);
-                String attachmentFile = fl.Name;
-
-                if (fl != null && attachmentFile != "")
-                {
-                    try
-                    {
-                        var rastream = RandomAccessStreamReference.CreateFromFile(fl);
-                        var attachment = new EmailAttachment(attachmentFile, rastream);
-                        msg.Attachments.Add(attachment);
-                    }
-                    catch (Exception e)
-                    {
-                        //  Debug.WriteLine("[C#] attachment exception: " + e.Message);
-                    }
-                }
-                
-                //  var file = await GetTextFile();
-                //  email.Attachments.Add(new EmailAttachment(file.Name, file));
-                await EmailManager.ShowComposeNewEmailAsync(email);
-
                 
                 DispatchCommandResult(new PluginResult(PluginResult.Status.OK, path));
             }
@@ -192,7 +188,7 @@ namespace Cordova.Extension.Commands
             {
                 DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
             }
-            */
+            
         }
         
     }

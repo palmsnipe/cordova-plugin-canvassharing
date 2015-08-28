@@ -45,7 +45,7 @@ module.exports = {
             console.log("CanvasSharingPlugin Error: failureCallback is not a function");
         }
         else {
-            return cordova.exec(successCallback, failureCallback, "CanvasSharing","appVersion",[title, description, picturepath]);
+            return cordova.exec(successCallback, failureCallback, "CanvasSharing","sendEmail",[title, description, picturepath]);
         }
     }
 };
