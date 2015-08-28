@@ -131,7 +131,7 @@ namespace Cordova.Extension.Commands
                             }
                         }
                     });
-                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
+                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, ""));
             }
             catch (Exception ex)
             {
@@ -164,7 +164,7 @@ namespace Cordova.Extension.Commands
                             }
                         }
                     });
-                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, version));
+                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, ""));
             }
             catch (Exception ex)
             {
