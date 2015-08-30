@@ -102,6 +102,11 @@ namespace Cordova.Extension.Commands
             try
             {
                 var items = JsonHelper.Deserialize<string[]>(jsonArgs);
+
+                //  for (var i = 0; i < items.Length; i++)
+                //  {
+                //      Debug.WriteLine(items[i]);
+                //  }
                 
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {
@@ -113,17 +118,19 @@ namespace Cordova.Extension.Commands
                             {
                                 ApplicationBar bar = new ApplicationBar();
                                 bar.Mode = ApplicationBarMode.Default;
-                                bar.Opacity = 0.8; 
+                                bar.Opacity = 1; 
                                 bar.IsVisible = true;
                                 bar.IsMenuEnabled = true;
                                 
                                 ApplicationBarMenuItem menuItem1 = new ApplicationBarMenuItem();
                                 menuItem1.Text = "About";
-                                
+                                menuItem1.Click += new EventHandler(aboutClick);
+
                                 ApplicationBarIconButton button1 = new ApplicationBarIconButton();
                                 button1.IconUri = new Uri("/Images/appbar.next.rest.png", UriKind.Relative);
-                                button1.Text = "Tee Elinluovutuskortti";
-                                
+                                button1.Text = "Next";
+                                button1.Click += new EventHandler(nextClick);
+
                                 bar.Buttons.Add(button1);
                                 bar.MenuItems.Add(menuItem1);
                                 
@@ -131,15 +138,25 @@ namespace Cordova.Extension.Commands
                             }
                         }
                     });
-                DispatchCommandResult(new PluginResult(PluginResult.Status.OK, ""));
+                //DispatchCommandResult(new PluginResult(PluginResult.Status.OK, ""));
             }
             catch (Exception ex)
             {
                 DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, ex.Message));
             }
         }
-        
-    
+
+        private void nextClick(object sender, EventArgs e)
+        {
+            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "card"));
+        }
+
+        private void aboutClick(object sender, EventArgs e)
+        {
+            DispatchCommandResult(new PluginResult(PluginResult.Status.OK, "about"));
+        }
+
+
         public void hideAppBar(string jsonArgs)
         {
             try
@@ -155,12 +172,13 @@ namespace Cordova.Extension.Commands
                             if (page != null)
                             {
                                 ApplicationBar bar = new ApplicationBar();
-                                bar.Mode = ApplicationBarMode.Default;
-                                bar.Opacity = 0.8; 
+                                bar.Mode = ApplicationBarMode.Minimized;
+                                bar.Opacity = 0;
                                 bar.IsVisible = false;
                                 bar.IsMenuEnabled = false;
-                                
+
                                 page.ApplicationBar = bar;
+                                // page.ApplicationBar.IsVisible = false;
                             }
                         }
                     });
