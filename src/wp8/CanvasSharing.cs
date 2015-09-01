@@ -8,14 +8,14 @@ using WPCordovaClassLib.Cordova.JSON;
 using Microsoft.Phone.Tasks;
 using System.Xml.Linq;
 
-//  using System.Windows;
-//  using Microsoft.Phone.Controls;
-//  using Microsoft.Phone.Shell;
+using System.Windows;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 
-//  using Windows.Storage;
-//  using Windows.Storage.Streams;
+using Windows.Storage;
+using Windows.Storage.Streams;
 //  using Windows.ApplicationModel.Email;
-//  using System.Diagnostics;
+using System.Diagnostics;
 
 namespace Cordova.Extension.Commands
 {
