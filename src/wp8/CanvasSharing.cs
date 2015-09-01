@@ -8,14 +8,14 @@ using WPCordovaClassLib.Cordova.JSON;
 using Microsoft.Phone.Tasks;
 using System.Xml.Linq;
 
-using System.Windows;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
+//  using System.Windows;
+//  using Microsoft.Phone.Controls;
+//  using Microsoft.Phone.Shell;
 
-using Windows.Storage;
-using Windows.Storage.Streams;
-using Windows.ApplicationModel.Email;
-using System.Diagnostics;
+//  using Windows.Storage;
+//  using Windows.Storage.Streams;
+//  using Windows.ApplicationModel.Email;
+//  using System.Diagnostics;
 
 namespace Cordova.Extension.Commands
 {
@@ -191,43 +191,43 @@ namespace Cordova.Extension.Commands
         }
         
         
-        private async void ComposeEmail(String subject, String messageBody, StorageFile fl)
-        {
-            var msg = new EmailMessage();
-            msg.Subject = subject;
-            msg.Body = messageBody;
+        //  private async void ComposeEmail(String subject, String messageBody, StorageFile fl)
+        //  {
+        //      var msg = new EmailMessage();
+        //      msg.Subject = subject;
+        //      msg.Body = messageBody;
 
-            String attachmentFile = fl.Name;
+        //      String attachmentFile = fl.Name;
 
-            if (fl != null && attachmentFile != "")
-            {
-                try
-                {
-                    var rastream = RandomAccessStreamReference.CreateFromFile(fl);
-                    var attachment = new EmailAttachment(attachmentFile, rastream);
-                    msg.Attachments.Add(attachment);
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine("[C#] attachment exception: " + e.Message);
-                }
-            }
+        //      if (fl != null && attachmentFile != "")
+        //      {
+        //          try
+        //          {
+        //              var rastream = RandomAccessStreamReference.CreateFromFile(fl);
+        //              var attachment = new EmailAttachment(attachmentFile, rastream);
+        //              msg.Attachments.Add(attachment);
+        //          }
+        //          catch (Exception e)
+        //          {
+        //              Debug.WriteLine("[C#] attachment exception: " + e.Message);
+        //          }
+        //      }
 
-            try
-            {
-                await EmailManager.ShowComposeNewEmailAsync(msg);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("[C#] email manager exception: " + e.Message);
-            }
-        }
+        //      try
+        //      {
+        //          await EmailManager.ShowComposeNewEmailAsync(msg);
+        //      }
+        //      catch (Exception e)
+        //      {
+        //          Debug.WriteLine("[C#] email manager exception: " + e.Message);
+        //      }
+        //  }
     
-        private async void CreateEmail(String subject, String body, String path)
-        {
-            storageFile = await StorageFile.GetFileFromPathAsync(path);
-            ComposeEmail(subject, body, storageFile);
-        }
+        //  private async void CreateEmail(String subject, String body, String path)
+        //  {
+        //      storageFile = await StorageFile.GetFileFromPathAsync(path);
+        //      ComposeEmail(subject, body, storageFile);
+        //  }
         
     
         public void sendEmail(string jsonArgs)
@@ -242,10 +242,10 @@ namespace Cordova.Extension.Commands
                 string path = options[2];
                 
 
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    CreateEmail(title, description, path);
-                });
+                //  Deployment.Current.Dispatcher.BeginInvoke(() =>
+                //  {
+                //      CreateEmail(title, description, path);
+                //  });
                 
                 DispatchCommandResult(new PluginResult(PluginResult.Status.OK, path));
             }
